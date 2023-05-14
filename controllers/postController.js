@@ -47,7 +47,7 @@ exports.getPostsByPages = async(req,res)=>{
         const {page} = req.query;
         const limit = 20;
         const offset = (page-1)*limit;
-        const data = await Post.findAll({limit,offset,order:[["id","ASC"]]});
+        const data = await Post.findAll({limit,offset,order:[["createdAt","DESC"]]});
         const totalCount = await Post.count();
         const totalPages = Math.ceil(totalCount/limit);
         res.status(200).json({message:"Success!", data,totalCount,totalPages})
