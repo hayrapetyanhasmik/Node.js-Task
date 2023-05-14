@@ -5,13 +5,13 @@ const {Post} = require('../models');
 
 exports.authenticateToken = (req,res,next)=>{
     const token = req.headers.authorization;
-    const {userId} = req.body; 
+    const {UserId} = req.body; 
     if(token === null) return res.status(401).json({message:"Not allowed"})
     jwt.verify(token,SECRET, (err,data)=>{
-        Post.findOne({where:{userId}}) 
+        Post.findOne({where:{UserId}}) 
         if(err){
             res.status(401).json({message:"Requires authentication"})
-        }else if(data.id === userId){
+        }else if(data.id === UserId){
             next()
         } 
     })
