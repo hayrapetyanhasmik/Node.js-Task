@@ -45,12 +45,12 @@ exports.deletePost = async(req,res)=>{
 exports.getPostsByPages = async(req,res)=>{
     try{
         const {page} = req.query;
-        const limit = 2;
+        const limit = 20;
         const offset = (page-1)*limit;
         const data = await Post.findAll({limit,offset,order:[["id","ASC"]]});
         const totalCount = await Post.count();
         const totalPages = Math.ceil(totalCount/limit);
-        res.status(200).json({message:"Cuccess!", data,totalCount,totalPages})
+        res.status(200).json({message:"Success!", data,totalCount,totalPages})
     }catch(error){
         res.status(500).json({error:"Something went wrong."})
     }
